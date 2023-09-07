@@ -1,0 +1,42 @@
+Fraga om filstruktur
+
+To Do:
+Skapa Create new post.
+Skapa ny sida nar man trycker pa en post sa hela bodyn syns.
+
+
+
+Inlägg på huvudsidan ska visa:
+
+OK Titel
+OK En del av innehållet (max 60 tecken) (kallad body i API:et)
+OK Taggar
+OK Namn på skaparen (användaren)
+
+Skapa nytt inlägg
+Denna funktionalitet implementeras genom att välja vilken användare som ska skapa inlägget. Detta är inte realistiskt och inte hur reddit fungerar eftersom man vanligtvis är inloggad på en användare, men det är så uppgiften är. Vid skapandet av inlägget ska man alltså få välja vilken användare (utav de som API:et innehåller) som skapar inlägget.
+Ni skall anroppa API:et för att skapa nya inlägg (se endpoint)
+Tänk på att API:et inte faktiskt ändrar inlägg-databasen så ni måste hantera det lokalt
+
+
+Trycka på inlägg (se nedanför)
+Du ska kunna trycka på ett inlägg vilket skickar dig till en "ny" sida som visar hela inlägget. På denna sida ska följande visas:
+
+Titel
+Hela innehållet (kallad body i API:et)
+Taggar
+Namn på skaparen (användaren)
+Antal reaktioner (kallad reactions i API:et)
+Kommentarer
+En kommentar ska bestå av dess innehåll (också kallad body i API:et) samt namnet på skaparen (användaren) av kommentaren
+På sidan skall också följande vara möjligt:
+
+Skriva ny kommentar på inlägget
+Ni skall anroppa API:et för att lägga till nya kommentarer (se endpoint)
+Tänk på att API:et inte faktiskt ändrar kommentar-databasen så ni måste hantera det lokalt
+Reagera (ökar bara reactions antalet)
+Övrig information:
+
+API objekten innehåller all information du kan behöva
+Nya användare kan inte skapas. De som kommer från API:et är alla som ska finnas
+Det finns ingen "inloggning"

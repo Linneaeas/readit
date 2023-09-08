@@ -13,6 +13,8 @@ export function Post({ posts }) {
         <>
           <h2>{post.title}</h2>
           <p>{post.body}</p>
+          <p>{post.tags}</p>
+          <p>{post.reactions}</p>
         </>
       ) : (
         <p>Post not found</p>

@@ -40,3 +40,11 @@ Reagera (ökar bara reactions antalet)
 API objekten innehåller all information du kan behöva
 Nya användare kan inte skapas. De som kommer från API:et är alla som ska finnas
 Det finns ingen "inloggning"
+
+
+ 
+
+          <p>{post.reactions}</p>
+          
+          
+     

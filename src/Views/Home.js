@@ -2,18 +2,8 @@ import React from "react";
 import { useEffect, useState, Link, Route, Routes } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function Home() {
+export function Home({ posts, users }) {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch("https://dummyjson.com/posts")
-      .then((res) => res.json())
-      .then((res) => setPosts(res.posts));
-
-    fetch("https://dummyjson.com/users")
-      .then((res) => res.json())
-      .then((res) => setUsers(res.users));
-  }, []);
 
   const usersMap = users.reduce((map, user) => {
     map[user.id] = user;

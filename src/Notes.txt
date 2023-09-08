@@ -1,8 +1,12 @@
 Fraga om filstruktur
 
 To Do:
+Lagga in anvandarnamn
+Kommentarer 
+
+Andra reaktioner
 Skapa Create new post.
-Skapa ny sida nar man trycker pa en post sa hela bodyn syns.
+
 
 
 
@@ -20,14 +24,14 @@ Tänk på att API:et inte faktiskt ändrar inlägg-databasen så ni måste hante
 
 
 Trycka på inlägg (se nedanför)
-Du ska kunna trycka på ett inlägg vilket skickar dig till en "ny" sida som visar hela inlägget. På denna sida ska följande visas:
+OK  Du ska kunna trycka på ett inlägg vilket skickar dig till en "ny" sida som visar hela inlägget. På denna sida ska följande visas:
 
-Titel
-Hela innehållet (kallad body i API:et)
-Taggar
-Namn på skaparen (användaren)
-Antal reaktioner (kallad reactions i API:et)
-Kommentarer
+OK Titel
+OK Hela innehållet (kallad body i API:et)
+OK  Taggar
+NEEEEEJ     Namn på skaparen (användaren)
+OK Antal reaktioner (kallad reactions i API:et)
+NEEEJ Kommentarer
 En kommentar ska bestå av dess innehåll (också kallad body i API:et) samt namnet på skaparen (användaren) av kommentaren
 På sidan skall också följande vara möjligt:
 
@@ -44,7 +48,7 @@ Det finns ingen "inloggning"
 
  
 
-          <p>{post.reactions}</p>
+
           
           
      

@@ -1,5 +1,7 @@
 godis = index för en post
 
+Har vi kopplat postid till rätt user?
+
 Fraga om filstruktur
 
 To Do:
@@ -31,10 +33,10 @@ OK  Du ska kunna trycka på ett inlägg vilket skickar dig till en "ny" sida som
 OK Titel
 OK Hela innehållet (kallad body i API:et)
 OK  Taggar
-NEEEEEJ     Namn på skaparen (användaren)
+OK     Namn på skaparen (användaren)
 OK Antal reaktioner (kallad reactions i API:et)
-NEEEJ Kommentarer
-En kommentar ska bestå av dess innehåll (också kallad body i API:et) samt namnet på skaparen (användaren) av kommentaren
+OK Kommentar(ej flera)
+OK En kommentar ska bestå av dess innehåll (också kallad body i API:et) samt namnet på skaparen (användaren) av kommentaren
 På sidan skall också följande vara möjligt:
 
 Skriva ny kommentar på inlägget

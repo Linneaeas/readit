@@ -15,8 +15,8 @@ export function Home({ posts, users }) {
       {posts.map((post, index) => (
         <div key={index} onClick={() => navigate("/Post/" + post.id)}>
           <h3>{post.title}</h3>
-          {usersMap[post.userId] && (
-            <p className="userName">{usersMap[post.userId].username} </p>
+          {usersMap[post.id] && (
+            <p className="userName">{usersMap[post.id].username} </p>
           )}
           <p>{post.body.slice(0, 60)}...</p>
           <label>

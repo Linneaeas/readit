@@ -1,3 +1,5 @@
+godis = index för en post
+
 Fraga om filstruktur
 
 To Do:

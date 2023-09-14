@@ -34,7 +34,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home posts={posts} users={users} />} />
         <Route path="/CreatePost" element={<CreatePost />} />
-        <Route path="/Post/:id" element={<Post posts={posts} />} />
+        <Route
+          path="/Post/:id"
+          element={<Post posts={posts} users={users} />}
+        />
       </Routes>
     </>
   );

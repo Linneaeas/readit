@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
-export function Post({ posts, users, comments }) {
+export function Post({ posts, users, comments, setPosts }) {
   let { id } = useParams();
 
   const indPost = posts.find((indPost) => indPost.id === parseInt(id, 10));
@@ -13,7 +14,18 @@ export function Post({ posts, users, comments }) {
   const indComment = comments.find(
     (indComment) => indComment.id === (indComment && indPost.id)
   );
-  console.log(indComment);
+
+  const handleLikeClick = () => {
+    setPosts(
+      posts.map((allPostsOneByOne) => {
+        if (allPostsOneByOne === indPost) {
+          return { ...indPost, reactions: indPost.reactions + 1 };
+        } else {
+          return allPostsOneByOne;
+        }
+      })
+    );
+  };
 
   return (
     <div className="postContainer">
@@ -25,8 +37,9 @@ export function Post({ posts, users, comments }) {
             <p>{indPost.body}</p>
           </div>
           <div className="postReactionsComments">
-            <p>{indPost.tags}</p>
+            <label>{indPost.tags.join(" ")}</label>
             <p>{indPost.reactions}</p>
+            <button onClick={handleLikeClick}>Like</button>
           </div>
           <div className="commentSection">
             <h4>Comments:</h4>

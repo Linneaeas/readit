@@ -19,14 +19,7 @@ export function Home({ posts, users }) {
             <p className="userName">{usersMap[eachPost.id].username} </p>
           )}
           <p>{eachPost.body.slice(0, 60)}...</p>
-          <label>
-            {eachPost.tags.map((tag, tagIndex) => (
-              <span key={tagIndex}>
-                {tag}
-                {tagIndex < eachPost.tags.length - 1 && " "}
-              </span>
-            ))}
-          </label>
+          <label>{eachPost.tags.join(" ")}</label>
         </div>
       ))}
     </>

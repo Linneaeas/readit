@@ -27,6 +27,40 @@ export function Post({ posts, users, comments, setPosts }) {
     );
   };
 
+  const [newComment, setNewComment] = useState(""); //Skapar nya states for att kunna lagga till nya kommentarer.
+  const [postComments, setPostComments] = useState([]); //Skapar nya states for att kunna publicera den nya kommentaren.
+
+  const handleCommentChange = (event) => {
+    setNewComment(event.target.value);
+  };
+
+  const handleAddComment = () => {
+    // Generate a random user for this comment
+    const randomUserIndex = Math.floor(Math.random() * users.length);
+    const randomCommentUser = users[randomUserIndex];
+
+    fetch("https://dummyjson.com/comments/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        body: newComment,
+        postId: indPost.id, // Use the postId of the current post
+        userId: randomCommentUser.id, // Use the randomly generated userId
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // Update the postComments state with the new comment and its associated user
+        setPostComments([
+          ...postComments,
+          { comment: data, user: randomCommentUser },
+        ]);
+      })
+      .catch((error) => console.error("Error adding comment:", error));
+
+    setNewComment(""); // Clear the comment input field after adding a comment
+  };
+
   return (
     <div className="postContainer">
       {indPost && indUser && indComment ? (
@@ -42,9 +76,29 @@ export function Post({ posts, users, comments, setPosts }) {
             <button onClick={handleLikeClick}>Like</button>
           </div>
           <div className="commentSection">
-            <h4>Comments:</h4>
-            <h5>{indComment.user.username}</h5>
-            <p>{indComment.body}</p>
+            <div className="existingComment">
+              <h4>Comments:</h4>
+              <h5>{indComment.user.username}</h5>
+              <p>{indComment.body}</p>
+            </div>
+
+            {postComments.map((commentData, index) => (
+              <div key={index}>
+                <h5>{commentData.user.username}</h5>
+                <p>{commentData.comment.body}</p>
+              </div>
+            ))}
+
+            <div className="newComment">
+              <textarea
+                placeholder="Add a comment..."
+                value={newComment}
+                onChange={handleCommentChange}
+              />
+              <button className="addComment" onClick={handleAddComment}>
+                Add comment
+              </button>
+            </div>
           </div>
         </>
       ) : (

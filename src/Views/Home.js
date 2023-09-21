@@ -11,9 +11,13 @@ export function Home({ posts, users }) {
   }, {});
 
   return (
-    <>
+    <div className="homeContainer">
       {posts.map((eachPost, index) => (
-        <div key={index} onClick={() => navigate("/Post/" + eachPost.id)}>
+        <div
+          className="onePostHome"
+          key={index}
+          onClick={() => navigate("/Post/" + eachPost.id)}
+        >
           <h3>{eachPost.title}</h3>
           {usersMap[eachPost.id] && (
             <p className="userName">{usersMap[eachPost.id].username} </p>
@@ -22,6 +26,6 @@ export function Home({ posts, users }) {
           <label>{eachPost.tags.join(" ")}</label>
         </div>
       ))}
-    </>
+    </div>
   );
 }

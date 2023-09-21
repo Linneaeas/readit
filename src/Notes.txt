@@ -69,3 +69,51 @@ In the Post component, posts and users are used to find and display information 
 So, both components receive posts and users as props, but they use them differently based on the component's specific functionality. The Post component has additional logic to locate and display a single post and its associated user, while the Home component displays a list of posts.
 
 The routing configuration you provided is correctly passing the data to both components, and they are working differently because they serve different purposes within your application. */
+
+
+
+
+
+
+It seems like you're trying to create a comment functionality where each new comment has a randomized user. To achieve this, you'll need to make some modifications to your handleAddComment function to generate a random user for each comment. We'll also modify the state to keep track of comments so that they don't get overwritten.
+
+Here's an updated version of your handleAddComment function:
+
+const handleAddComment = () => {
+  // Generate a random user for this comment
+  const randomUserIndex = Math.floor(Math.random() * users.length);
+  const randomCommentUser = users[randomUserIndex];
+
+  fetch("https://dummyjson.com/comments/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      body: newComment,
+      postId: indPost.id,  // Use the postId of the current post
+      userId: randomCommentUser.id  // Use the randomly generated userId
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      // Update the postComments state with the new comment and its associated user
+      setPostComments([...postComments, { comment: data, user: randomCommentUser }]);
+    })
+    .catch((error) => console.error("Error adding comment:", error));
+
+  setNewComment(""); // Clear the comment input field after adding a comment
+};
+
+
+
+In this updated handleAddComment function, we generate a random user for each comment and associate it with the comment that is being added. We store both the comment and the associated user in the postComments state.
+
+In the return block, we modify the mapping of postComments to display the username of the associated user for each comment:
+
+javascript
+{postComments.map((commentData, index) => (
+  <div key={index}>
+    <h5>{commentData.user.username}</h5>
+    <p>{commentData.comment.body}</p>
+  </div>
+))}
+This way, each comment will have a randomized user associated with it, and the previous comments won't change when a new one is added.

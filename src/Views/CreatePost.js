@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Post } from "./Post";
 
-export function CreatePost({ users }) {
+export function CreatePost({ users, setPosts, posts }) {
   const usernames = users.map((user) => user.username);
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
@@ -28,6 +28,18 @@ export function CreatePost({ users }) {
         .then((res) => res.json())
         .then((data) => {
           // Update the newPost state with the new post
+
+          setPosts([
+            ...posts,
+            {
+              id: data.id,
+              title: newTitle,
+              body: newBody,
+              userId: selectedUser.id,
+              tags: [],
+              reactions: 0,
+            },
+          ]);
           setNewPost([
             ...newPost,
             {

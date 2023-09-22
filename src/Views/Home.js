@@ -2,11 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import {
-  getPostsFromLocalStorage,
-  savePostsToLocalStorage,
-} from "../LocalStorage";
-
 export function Home({ posts, users }) {
   const navigate = useNavigate();
 

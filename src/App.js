@@ -5,10 +5,6 @@ import "./App.css";
 import { Home } from "./Views/Home";
 import { Post } from "./Views/Post";
 import { CreatePost } from "./Views/CreatePost";
-import {
-  getPostsFromLocalStorage,
-  savePostsToLocalStorage,
-} from "./LocalStorage";
 
 function App() {
   const [posts, setPosts] = useState([]); //Skapar State variables med empty arrays

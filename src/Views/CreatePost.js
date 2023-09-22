@@ -1,31 +1,20 @@
 import React, { useState } from "react";
 import { Post } from "./Post";
-import {
-  getPostsFromLocalStorage,
-  savePostsToLocalStorage,
-} from "../LocalStorage";
-import { useEffect } from "react";
 
-export function CreatePost({ users, setPosts, posts }) {
+export function CreatePost({ users }) {
   const usernames = users.map((user) => user.username);
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
   const [newPost, setNewPost] = useState([]); // Updated to an array to store multiple posts
   const [selectedUsername, setSelectedUsername] = useState("");
 
-  useEffect(() => {
-    // Retrieve posts from local storage when the component mounts
-    const storedPosts = getPostsFromLocalStorage();
-    if (storedPosts) {
-      setNewPost(storedPosts);
-    }
-  }, []);
-
   const handleAddPost = () => {
+    // Find the user object based on the selected username
     const selectedUser = users.find(
       (user) => user.username === selectedUsername
     );
 
+    // Check if a user was found
     if (selectedUser) {
       fetch("https://dummyjson.com/posts/add", {
         method: "POST",
@@ -38,33 +27,21 @@ export function CreatePost({ users, setPosts, posts }) {
       })
         .then((res) => res.json())
         .then((data) => {
-          const newPostItem = {
-            id: data.id,
-            title: newTitle,
-            body: newBody,
-            user: selectedUsername,
-          };
-
-          setPosts([
-            ...posts,
+          // Update the newPost state with the new post
+          setNewPost([
+            ...newPost,
             {
-              id: data.id,
+              post: data,
+              user: selectedUsername,
               title: newTitle,
               body: newBody,
-              userId: selectedUser.id,
-              tags: [],
-              reactions: 0,
             },
           ]);
-
-          setNewPost([...newPost, newPostItem]);
-
-          savePostsToLocalStorage([...newPost, newPostItem]); // Save updated posts to local storage
         })
         .catch((error) => console.error("Error adding post:", error));
 
-      setNewTitle("");
-      setNewBody("");
+      setNewTitle(""); // Clear the title input field after adding a post
+      setNewBody(""); // Clear the body input field after adding a post
     }
   };
 

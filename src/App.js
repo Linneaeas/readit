@@ -16,10 +16,6 @@ function App() {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    getPostsFromLocalStorage(posts);
-  }, [posts]);
-
-  useEffect(() => {
     fetch("https://dummyjson.com/posts")
       .then((res) => res.json())
       .then((res) => setPosts(res.posts));

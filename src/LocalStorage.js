@@ -1,19 +1,19 @@
 // POSTS
-export const savePostsToLocalStorage = (newPosts) => {
+export const savePostsToLocalStorage = (posts) => {
   try {
-    const serializedNewPosts = JSON.stringify(newPosts);
-    localStorage.setItem("newPosts", serializedNewPosts);
+    const serializedPosts = JSON.stringify(posts);
+    localStorage.setItem("posts", serializedPosts);
   } catch (error) {
     console.error("Error saving Posts to local storage:", error);
   }
 };
 export const getPostsFromLocalStorage = () => {
   try {
-    const serializedNewPosts = localStorage.getItem("newPosts");
-    if (serializedNewPosts === null) {
+    const serializedPosts = localStorage.getItem("posts");
+    if (serializedPosts === null) {
       return undefined;
     }
-    return JSON.parse(serializedNewPosts);
+    return JSON.parse(serializedPosts);
   } catch (error) {
     console.error("Error getting Posts from local storage:", error);
     return undefined;

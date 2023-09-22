@@ -1,5 +1,4 @@
 To Do:
-Lägga till kommentar 
 Skapa nytt inlägg
 
 Om tid och lust: 
@@ -31,10 +30,11 @@ OK Kommentar(ej flera)
 OK En kommentar ska bestå av dess innehåll (också kallad body i API:et) samt namnet på skaparen (användaren) av kommentaren
 På sidan skall också följande vara möjligt:
 
-Skriva ny kommentar på inlägget
-Ni skall anroppa API:et för att lägga till nya kommentarer (se endpoint)
+OK Skriva ny kommentar på inlägget
+OK Ni skall anroppa API:et för att lägga till nya kommentarer (se endpoint)
 Tänk på att API:et inte faktiskt ändrar kommentar-databasen så ni måste hantera det lokalt
-Reagera (ökar bara reactions antalet)
+OK  Reagera (ökar bara reactions antalet)
+
 Övrig information:
 
 API objekten innehåller all information du kan behöva

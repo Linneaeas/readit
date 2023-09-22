@@ -38,7 +38,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home posts={posts} users={users} />} />
-        <Route path="/CreatePost" element={<CreatePost />} />
+        <Route
+          path="/CreatePost"
+          element={<CreatePost posts={posts} users={users} />}
+        />
         <Route
           path="/Post/:id"
           element={

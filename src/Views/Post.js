@@ -6,11 +6,9 @@ export function Post({ posts, users, comments, setPosts }) {
   let { id } = useParams();
 
   const indPost = posts.find((indPost) => indPost.id === parseInt(id, 10));
-
   const indUser = users.find(
     (indUser) => indUser.id === (indPost && indPost.id)
   );
-
   const indComment = comments.find(
     (indComment) => indComment.id === (indComment && indPost.id)
   );

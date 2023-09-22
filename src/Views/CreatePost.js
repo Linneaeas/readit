@@ -1,28 +1,31 @@
 import React, { useState } from "react";
 import { Post } from "./Post";
 
-export function CreatePost({ users, setPosts, posts }) {
+export function CreatePost({
+  users,
+  setPosts,
+  posts,
+  selectedUsername,
+  setSelectedUsername,
+}) {
   const usernames = users.map((user) => user.username);
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
   const [newPost, setNewPost] = useState([]); // Updated to an array to store multiple posts
-  const [selectedUsername, setSelectedUsername] = useState("");
 
   const handleAddPost = () => {
     // Find the user object based on the selected username
-    const selectedUser = users.find(
-      (user) => user.username === selectedUsername
-    );
+    const selectedUser = { username: selectedUsername };
 
     // Check if a user was found
-    if (selectedUser) {
+    if (selectedUsername) {
       fetch("https://dummyjson.com/posts/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: newTitle,
           body: newBody,
-          userId: selectedUser.id,
+          userId: selectedUsername,
         }),
       })
         .then((res) => res.json())
@@ -35,7 +38,7 @@ export function CreatePost({ users, setPosts, posts }) {
               id: data.id,
               title: newTitle,
               body: newBody,
-              userId: selectedUser.id,
+              userId: selectedUsername,
               tags: [],
               reactions: 0,
             },
@@ -43,7 +46,7 @@ export function CreatePost({ users, setPosts, posts }) {
           setNewPost([
             ...newPost,
             {
-              post: data,
+              godis: data,
               user: selectedUsername,
               title: newTitle,
               body: newBody,
@@ -98,12 +101,12 @@ export function CreatePost({ users, setPosts, posts }) {
       <button onClick={handleAddPost}>Add Post</button>
 
       {/* Display the added posts */}
-      <div>
-        {newPost.map((post, index) => (
-          <div key={index}>
-            <h4>{post.title}</h4>
-            <p>{post.body}</p>
-            <p>User: {post.user}</p>
+      <div className="homeContainer">
+        {newPost.map((godis, index) => (
+          <div className="onePostHome" key={index}>
+            <h3>{godis.title}</h3>
+            <p className="userName">User: {godis.user}</p>
+            <p>{godis.body}</p>
           </div>
         ))}
       </div>

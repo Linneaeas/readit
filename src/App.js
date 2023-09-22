@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Home } from "./Views/Home";
@@ -7,11 +6,13 @@ import { Post } from "./Views/Post";
 import { CreatePost } from "./Views/CreatePost";
 
 function App() {
-  const [posts, setPosts] = useState([]); //Skapar State variables med empty arrays
+  const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [comments, setComments] = useState([]);
+  const [selectedUsername, setSelectedUsername] = useState("");
 
   useEffect(() => {
+    // Fetch data when component mounts
     fetch("https://dummyjson.com/posts")
       .then((res) => res.json())
       .then((res) => setPosts(res.posts));
@@ -37,11 +38,26 @@ function App() {
       </ul>
 
       <Routes>
-        <Route path="/" element={<Home posts={posts} users={users} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              selectedUsername={selectedUsername}
+              posts={posts}
+              users={users}
+            />
+          }
+        />
         <Route
           path="/CreatePost"
           element={
-            <CreatePost setPosts={setPosts} posts={posts} users={users} />
+            <CreatePost
+              selectedUsername={selectedUsername}
+              setPosts={setPosts}
+              posts={posts}
+              users={users}
+              setSelectedUsername={setSelectedUsername}
+            />
           }
         />
         <Route
@@ -52,6 +68,8 @@ function App() {
               users={users}
               comments={comments}
               setPosts={setPosts}
+              selectedUsername={selectedUsername}
+              setSelectedUsername={setSelectedUsername}
             />
           }
         />

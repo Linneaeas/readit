@@ -1,3 +1,6 @@
+Notes to self: Glom inte att skicka med props i routing section!! :D
+
+
 To Do:
 Skapa nytt inlägg
 

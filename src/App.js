@@ -5,11 +5,19 @@ import "./App.css";
 import { Home } from "./Views/Home";
 import { Post } from "./Views/Post";
 import { CreatePost } from "./Views/CreatePost";
+import {
+  getPostsFromLocalStorage,
+  savePostsToLocalStorage,
+} from "./LocalStorage";
 
 function App() {
   const [posts, setPosts] = useState([]); //Skapar State variables med empty arrays
   const [users, setUsers] = useState([]);
   const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    getPostsFromLocalStorage(posts);
+  }, [posts]);
 
   useEffect(() => {
     fetch("https://dummyjson.com/posts")
@@ -40,7 +48,9 @@ function App() {
         <Route path="/" element={<Home posts={posts} users={users} />} />
         <Route
           path="/CreatePost"
-          element={<CreatePost posts={posts} users={users} />}
+          element={
+            <CreatePost setPosts={setPosts} posts={posts} users={users} />
+          }
         />
         <Route
           path="/Post/:id"

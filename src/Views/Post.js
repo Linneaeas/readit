@@ -1,6 +1,11 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+
+import {
+  getPostsFromLocalStorage,
+  savePostsToLocalStorage,
+} from "../LocalStorage";
 
 export function Post({ posts, users, comments, setPosts }) {
   let { id } = useParams();

@@ -1,5 +1,8 @@
+* {
+  margin: 0;
+}
 .userName {
-  color: red;
+  color: rgba(0, 0, 255, 0.5);
 }
 
 .homeContainer {
@@ -7,5 +10,43 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem;
+  margin-top: 3em;
+}
+
+a {
+  text-decoration: none;
+  font-size: 25px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: black;
+  font-weight: bolder;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  background-color: rgba(0, 0, 255, 0.351);
+  list-style: none;
+  gap: 3em;
+  padding: 2em;
+}
+
+.onePostHome {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 30em;
+}
+
+.onePostHome:hover {
+  scale: 110%;
+}
+
+label {
+  margin-top: 0.5rem;
+  font-style: italic;
 }

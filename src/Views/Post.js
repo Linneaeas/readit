@@ -4,16 +4,11 @@ import { useParams } from "react-router-dom";
 
 export function Post({ posts, users, comments, setPosts }) {
   const [newComment, setNewComment] = useState(""); //Skapar nya states for att kunna lagga till nya kommentarer.
-  const [postComments, setPostComments] = useState([]); //Skapar nya states for att kunna publicera den nya kommentaren.
   const { id } = useParams();
-
   const indPost = posts.find((post) => post && post.id === parseInt(id, 10));
 
   const indUser = users.find(
-    (indUser) => indUser.id === (indPost && indPost.id)
-  );
-  const indComment = comments.find(
-    (indComment) => indComment.id === (indComment && indPost.id)
+    (indUser) => indPost && indUser.id === indPost.userId
   );
 
   const handleLikeClick = () => {
@@ -47,22 +42,16 @@ export function Post({ posts, users, comments, setPosts }) {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        // Update the postComments state with the new comment and its associated user
-        setPostComments([
-          ...postComments,
-          { comment: data, user: randomCommentUser },
-        ]);
-      })
+      .then((data) => {})
       .catch((error) => console.error("Error adding comment:", error));
 
     setNewComment(""); // Clear the comment input field after adding a comment
   };
-  console.log("Posts array:", posts);
-  console.log("ID from URL:", id);
+
+  console.log(comments);
   return (
     <div className="postContainer">
-      {indPost && indUser && indComment ? (
+      {indPost && indUser ? (
         <>
           <div className="postSection">
             <h5 className="userName"> {indUser.username} </h5>
@@ -75,18 +64,20 @@ export function Post({ posts, users, comments, setPosts }) {
             <button onClick={handleLikeClick}>Like</button>
           </div>
           <div className="commentSection">
-            <div className="existingComment">
-              <h4>Comments:</h4>
-              <h5>{indComment.user.username}</h5>
-              <p>{indComment.body}</p>
-            </div>
+            <h4>Comments:</h4>
 
-            {postComments.map((commentData, index) => (
-              <div key={index}>
-                <h5>{commentData.user.username}</h5>
-                <p>{commentData.comment.body}</p>
-              </div>
-            ))}
+            {comments.map((commentData, index) => {
+              if (commentData.postId === indPost.id) {
+                return (
+                  <div key={index}>
+                    <h5>{commentData.user.username}</h5>
+                    <p>{commentData.body}</p>
+                    <p>{commentData.postId}</p>
+                  </div>
+                );
+              }
+              return null;
+            })}
 
             <div className="newComment">
               <textarea

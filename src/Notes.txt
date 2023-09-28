@@ -1,58 +1,10 @@
-Notes to self: Glom inte att skicka med props i routing section!! :D
-
-
-To Do:
-Skapa nytt inlägg
-
-Om tid och lust: 
-Spara till localStorage om vi vill/hinner
-Lägga till fler förtidsskrivna kommentarer på posts
+To do:
+Displayar inte användarnamn när create post
+Lägga till och displaya kommentarer
 
 
 
-Inlägg på huvudsidan ska visa:
-
-OK Titel
-OK En del av innehållet (max 60 tecken) (kallad body i API:et)
-OK Taggar
-OK Namn på skaparen (användaren)
-
-Skapa nytt inlägg
-Denna funktionalitet implementeras genom att välja vilken användare som ska skapa inlägget. Detta är inte realistiskt och inte hur reddit fungerar eftersom man vanligtvis är inloggad på en användare, men det är så uppgiften är. Vid skapandet av inlägget ska man alltså få välja vilken användare (utav de som API:et innehåller) som skapar inlägget.
-Ni skall anroppa API:et för att skapa nya inlägg (se endpoint)
-Tänk på att API:et inte faktiskt ändrar inlägg-databasen så ni måste hantera det lokalt
-
-
-OK  Du ska kunna trycka på ett inlägg vilket skickar dig till en "ny" sida som visar hela inlägget. På denna sida ska följande visas:
-OK Titel
-OK Hela innehållet (kallad body i API:et)
-OK  Taggar
-OK     Namn på skaparen (användaren)
-OK Antal reaktioner (kallad reactions i API:et)
-OK Kommentar(ej flera)
-OK En kommentar ska bestå av dess innehåll (också kallad body i API:et) samt namnet på skaparen (användaren) av kommentaren
-På sidan skall också följande vara möjligt:
-
-OK Skriva ny kommentar på inlägget
-OK Ni skall anroppa API:et för att lägga till nya kommentarer (se endpoint)
-Tänk på att API:et inte faktiskt ändrar kommentar-databasen så ni måste hantera det lokalt
-OK  Reagera (ökar bara reactions antalet)
-
-Övrig information:
-
-API objekten innehåller all information du kan behöva
-Nya användare kan inte skapas. De som kommer från API:et är alla som ska finnas
-Det finns ingen "inloggning"
-
-
- 
-
-
-          
-
-
-
-     /*In the routing configuration you provided, the App component is defining the routing for your application using React Router. Let's break down how the routes are working:
+/*In the routing configuration you provided, the App component is defining the routing for your application using React Router. Let's break down how the routes are working:
 
 <Route path="/" element={<Home posts={posts} users={users} />} />:
 

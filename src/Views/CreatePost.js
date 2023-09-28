@@ -15,17 +15,21 @@ export function CreatePost({
   const [nextPostId, setNextPostId] = useState(31); // Initialize with 31
   const handleAddPost = () => {
     // Find the user object based on the selected username
-    const selectedUser = { username: selectedUsername };
+    //const selectedUser = { username: selectedUsername };
 
     // Check if a user was found
     if (selectedUsername) {
+      let user = users.find(
+        (eachUser) => eachUser.username === selectedUsername
+      );
+
       fetch("https://dummyjson.com/posts/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: newTitle,
           body: newBody,
-          userId: selectedUsername,
+          userId: user.id,
         }),
       })
         .then((res) => res.json())
@@ -38,7 +42,7 @@ export function CreatePost({
               id: nextPostId,
               title: newTitle,
               body: newBody,
-              userId: selectedUsername,
+              userId: user.id,
               tags: [],
               reactions: 0,
             },
@@ -48,8 +52,9 @@ export function CreatePost({
             {
               id: nextPostId,
               godis: data,
-              user: selectedUsername,
+              user: user.id,
               title: newTitle,
+              userId: user.id,
               body: newBody,
             },
           ]);
@@ -102,6 +107,7 @@ export function CreatePost({
         value={newBody}
         onChange={handleBodyChange}
       />
+
       <button onClick={handleAddPost}>Add Post</button>
 
       {/* Display the added posts */}
@@ -109,7 +115,7 @@ export function CreatePost({
         {newPost.map((godis, index) => (
           <div className="onePostHome" key={index}>
             <h3>{godis.title}</h3>
-            <p className="userName">User: {godis.user}</p>
+            <p className="userName">User: {users.selectedUsername}</p>
             <p>{godis.body}</p>
           </div>
         ))}

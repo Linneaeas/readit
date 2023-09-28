@@ -17,18 +17,20 @@ function App() {
       .then((res) => res.json())
       .then((res) => setPosts(res.posts));
 
-    fetch("https://dummyjson.com/users")
+    fetch("https://dummyjson.com/users?limit=100")
       .then((res) => res.json())
-      .then((res) => setUsers(res.users));
+      .then((res) => {
+        setUsers(res.users);
+      });
 
-    fetch("https://dummyjson.com/comments")
+    fetch("https://dummyjson.com/comments?limit=340")
       .then((res) => res.json())
       .then((res) => setComments(res.comments));
   }, []);
 
   return (
-    <>
-      <ul>
+    <div className="pageContainer">
+      <ul className="navLinks">
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -74,7 +76,7 @@ function App() {
           }
         />
       </Routes>
-    </>
+    </div>
   );
 }
 

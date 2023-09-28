@@ -24,10 +24,13 @@ export function Home({ posts, users, selectedUsername }) {
           >
             <h3>{eachPost.title}</h3>
             <p className="userName">
-              User:{" "}
               {isCreatedPost
                 ? eachPost.userId
-                : usersMap[eachPost.userId]?.username}
+                : usersMap[eachPost.id] && (
+                    <p className="userName">
+                      {usersMap[eachPost.id].username}{" "}
+                    </p>
+                  )}
             </p>
             <p>{eachPost.body.slice(0, 60)}...</p>
             <label>{eachPost.tags.join(" ")}</label>

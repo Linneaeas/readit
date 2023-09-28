@@ -12,7 +12,7 @@ export function CreatePost({
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
   const [newPost, setNewPost] = useState([]); // Updated to an array to store multiple posts
-
+  const [nextPostId, setNextPostId] = useState(31); // Initialize with 31
   const handleAddPost = () => {
     // Find the user object based on the selected username
     const selectedUser = { username: selectedUsername };
@@ -35,7 +35,7 @@ export function CreatePost({
           setPosts([
             ...posts,
             {
-              id: data.id,
+              id: nextPostId,
               title: newTitle,
               body: newBody,
               userId: selectedUsername,
@@ -52,9 +52,12 @@ export function CreatePost({
               body: newBody,
             },
           ]);
+          // Increment the next post ID for the next post
+          setNextPostId(nextPostId + 1);
         })
         .catch((error) => console.error("Error adding post:", error));
 
+      setSelectedUsername(""); // Clear the title input field after adding a post
       setNewTitle(""); // Clear the title input field after adding a post
       setNewBody(""); // Clear the body input field after adding a post
     }

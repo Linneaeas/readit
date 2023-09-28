@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export function Post({ posts, users, comments, setPosts }) {
-  let { id } = useParams();
+  const [newComment, setNewComment] = useState(""); //Skapar nya states for att kunna lagga till nya kommentarer.
+  const [postComments, setPostComments] = useState([]); //Skapar nya states for att kunna publicera den nya kommentaren.
+  const { id } = useParams();
 
-  const indPost = posts.find((indPost) => indPost.id === parseInt(id, 10));
+  const indPost = posts.find((post) => post && post.id === parseInt(id, 10));
+
   const indUser = users.find(
     (indUser) => indUser.id === (indPost && indPost.id)
   );
@@ -24,9 +27,6 @@ export function Post({ posts, users, comments, setPosts }) {
       })
     );
   };
-
-  const [newComment, setNewComment] = useState(""); //Skapar nya states for att kunna lagga till nya kommentarer.
-  const [postComments, setPostComments] = useState([]); //Skapar nya states for att kunna publicera den nya kommentaren.
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -58,7 +58,8 @@ export function Post({ posts, users, comments, setPosts }) {
 
     setNewComment(""); // Clear the comment input field after adding a comment
   };
-
+  console.log("Posts array:", posts);
+  console.log("ID from URL:", id);
   return (
     <div className="postContainer">
       {indPost && indUser && indComment ? (

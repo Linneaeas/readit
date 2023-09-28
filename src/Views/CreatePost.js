@@ -46,6 +46,7 @@ export function CreatePost({
           setNewPost([
             ...newPost,
             {
+              id: nextPostId,
               godis: data,
               user: selectedUsername,
               title: newTitle,

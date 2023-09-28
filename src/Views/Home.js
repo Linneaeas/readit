@@ -1,8 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Post } from "./Post";
 
 export function Home({ posts, users, selectedUsername }) {
   const navigate = useNavigate();
+
+  const handlePostClick = (postId) => {
+    console.log("Clicked post ID:", postId);
+    navigate(`/Post/${postId}`);
+  };
 
   const usersMap = users.reduce((map, eachUser) => {
     map[eachUser.id] = eachUser;
@@ -20,7 +26,7 @@ export function Home({ posts, users, selectedUsername }) {
           <div
             className="onePostHome"
             key={index}
-            onClick={() => navigate("/Post/" + eachPost.id)}
+            onClick={() => handlePostClick(eachPost.id, eachPost.userId)}
           >
             <h3>{eachPost.title}</h3>
             <p className="userName">

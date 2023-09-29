@@ -77,7 +77,7 @@ export function Post({ posts, users, comments, setComments, setPosts }) {
             <p>{indPost.body}</p>
           </div>
           <div className="postReactionsComments">
-            <label>{indPost.tags.join(" ")}</label>
+            <label>#{indPost.tags.join(" #")}</label>
             <p>{indPost.reactions}</p>
             <button onClick={handleLikeClick}>Like</button>
           </div>
@@ -90,7 +90,6 @@ export function Post({ posts, users, comments, setComments, setPosts }) {
                   <div key={index}>
                     <h5>{commentData.user.username}</h5>
                     <p>{commentData.body}</p>
-                    <p>{commentData.postId}</p>
                   </div>
                 );
               }
@@ -100,7 +99,6 @@ export function Post({ posts, users, comments, setComments, setPosts }) {
               <div key={index}>
                 <h5>{comment.user.username}</h5>
                 <p>{comment.body}</p>
-                <p>{comment.postId}</p>
               </div>
             ))}
             <div className="newComment">

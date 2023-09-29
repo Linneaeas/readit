@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Post } from "./Post";
+import { CreatePost } from "./CreatePost";
 
 export function Home({ posts, users, selectedUsername }) {
   const navigate = useNavigate();

@@ -1,13 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Post } from "./Post";
-import { CreatePost } from "./CreatePost";
 
-export function Home({ posts, users, selectedUsername }) {
+export function Home({ posts, users }) {
   const navigate = useNavigate();
 
   const handlePostClick = (postId) => {
-    console.log("Clicked post ID:", postId);
     navigate(`/Post/${postId}`);
   };
 
@@ -23,10 +20,8 @@ export function Home({ posts, users, selectedUsername }) {
             onClick={() => handlePostClick(eachPost.id, eachPost.userId)}
           >
             <h3>{eachPost.title}</h3>
-            <p className="userName">
-              <p className="userName">
-                {user === undefined ? null : user.username}
-              </p>
+            <p className="userNameHome">
+              {user === undefined ? null : user.username}
             </p>
             <p>{eachPost.body.slice(0, 60)}...</p>
             <label>#{eachPost.tags.join(" #")}</label>

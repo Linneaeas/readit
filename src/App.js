@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import "./App.css";
 import { Home } from "./Views/Home";
 import { Post } from "./Views/Post";
 import { CreatePost } from "./Views/CreatePost";
+import "./App.css";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -12,7 +12,6 @@ function App() {
   const [selectedUsername, setSelectedUsername] = useState("");
 
   useEffect(() => {
-    // Fetch data when component mounts
     fetch("https://dummyjson.com/posts")
       .then((res) => res.json())
       .then((res) => setPosts(res.posts));
@@ -32,10 +31,10 @@ function App() {
     <div className="pageContainer">
       <ul className="navLinks">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">HOME</Link>
         </li>
         <li>
-          <Link to="/CreatePost">Create Post</Link>
+          <Link to="/CreatePost">ADD POST</Link>
         </li>
       </ul>
 

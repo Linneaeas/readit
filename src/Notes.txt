@@ -1,8 +1,3 @@
-To do:
-Displayar inte användarnamn när create post
-Lägga till och displaya kommentarer
-
-
 
 /*In the routing configuration you provided, the App component is defining the routing for your application using React Router. Let's break down how the routes are working:
 

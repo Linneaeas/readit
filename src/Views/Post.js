@@ -1,12 +1,11 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-export function Post({ posts, users, comments, setPosts }) {
-  const [newComment, setNewComment] = useState(""); //Skapar nya states for att kunna lagga till nya kommentarer.
+export function Post({ posts, users, comments, setComments, setPosts }) {
+  const [newBody, setNewBody] = useState("");
+  const [newComment, setNewComment] = useState([]); // Updated to an array to store multiple comments
   const { id } = useParams();
   const indPost = posts.find((post) => post && post.id === parseInt(id, 10));
-
   const indUser = users.find(
     (indUser) => indPost && indUser.id === indPost.userId
   );
@@ -24,10 +23,11 @@ export function Post({ posts, users, comments, setPosts }) {
   };
 
   const handleCommentChange = (event) => {
-    setNewComment(event.target.value);
+    setNewBody(event.target.value);
   };
 
   const handleAddComment = () => {
+    console.log(newComment);
     // Generate a random user for this comment
     const randomUserIndex = Math.floor(Math.random() * users.length);
     const randomCommentUser = users[randomUserIndex];
@@ -36,19 +36,37 @@ export function Post({ posts, users, comments, setPosts }) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        body: newComment,
+        body: newBody,
         postId: indPost.id, // Use the postId of the current post
-        userId: randomCommentUser.id, // Use the randomly generated userId
+        user: randomCommentUser,
       }),
     })
       .then((res) => res.json())
-      .then((data) => {})
+      .then((data) => {
+        // Update the newPost state with the new post
+
+        setComments([
+          ...comments,
+          {
+            id: data.id,
+            body: newBody,
+            user: randomCommentUser,
+          },
+        ]);
+        setNewComment([
+          ...newComment,
+          {
+            id: data.id,
+            user: randomCommentUser,
+            body: newBody,
+          },
+        ]);
+      })
       .catch((error) => console.error("Error adding comment:", error));
 
-    setNewComment(""); // Clear the comment input field after adding a comment
+    setNewBody(""); // Clear the title input field after adding a post
   };
 
-  console.log(comments);
   return (
     <div className="postContainer">
       {indPost && indUser ? (
@@ -78,11 +96,17 @@ export function Post({ posts, users, comments, setPosts }) {
               }
               return null;
             })}
-
+            {newComment.map((comment, index) => (
+              <div key={index}>
+                <h5>{comment.user.username}</h5>
+                <p>{comment.body}</p>
+                <p>{comment.postId}</p>
+              </div>
+            ))}
             <div className="newComment">
               <textarea
                 placeholder="Add a comment..."
-                value={newComment}
+                value={newBody}
                 onChange={handleCommentChange}
               />
               <button className="addComment" onClick={handleAddComment}>

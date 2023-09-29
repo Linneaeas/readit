@@ -69,6 +69,7 @@ function App() {
               posts={posts}
               users={users}
               comments={comments}
+              setComments={setComments}
               setPosts={setPosts}
               selectedUsername={selectedUsername}
               setSelectedUsername={setSelectedUsername}
